@@ -55,6 +55,7 @@ Note $$\Pi_{i} = P(A=1 | X_{i})$$; Prob. of treatment given control, and given c
     * Note logit is a custom function; `log(p) - log(1-p)`
 * Create matched pair from `pm`
 * Test SMD 
+* $`\sqrt{2}`$`
 
 
 
