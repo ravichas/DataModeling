@@ -44,10 +44,17 @@
 * Causal RR or OR use GEE or logit link function
 
 #### IV Propensity Scores for Matching
+
+Note $$\Pi_{i} = P(A=1 | X_{i})$$; Prob. of treatment given control, and given covariates X. 
  
 * `psmodel <- glm(y ~ X, family=binomial(), data=data)`
 * Calculate pscore using `pscore <- psmodel$fittedvalues
     * One could use MatchIt package and calculate pscore directly and create matched pairs
+* Use PS to calculate logit; then use logit for matching 
+* `pm <- Match(tr=data$treatment, M=1, x=logit(pscore), replace=FALSE)`
+    * Note logit is a custom function; `log(p) - log(1-p)`
+* Create matched pair from `pm`
+* Test SMD 
 
 
 
