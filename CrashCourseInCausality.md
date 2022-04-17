@@ -47,7 +47,9 @@
 #### IV Propensity Scores for Matching
 
 Probability of receiving treatment given control, and covariates X. 
+
 [comment]: # ( Taken from: https://stackoverflow.com/a/47798853/1474291 )
+
 <img src="https://latex.codecogs.com/svg.image?\Pi_{i}&space;=&space;P(A=1|X_{i})"
 title="\Large \Pi_{i}=P(A=1|X_{i})"/>
  
