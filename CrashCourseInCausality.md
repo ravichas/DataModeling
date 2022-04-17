@@ -46,7 +46,10 @@
 #### IV Propensity Scores for Matching
 
 Prob. of treatment given control, and given covariates X. 
-https://latex.codecogs.com/svg.image?\Pi_{i}&space;=&space;P(A=1|X_{i})
+
+[comment]: # ( Taken from: https://stackoverflow.com/a/47798853/1474291 )
+<img src="https://latex.codecogs.com/svg.image?\Pi_{i}&space;=&space;P(A=1|X_{i})"
+title="\Large \Pi_{i}=P(A=1|X_{i})"/>
  
 * `psmodel <- glm(y ~ X, family=binomial(), data=data)`
 * Calculate pscore using `pscore <- psmodel$fittedvalues
