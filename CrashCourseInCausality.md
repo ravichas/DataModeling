@@ -12,27 +12,42 @@
     * sandwich # for robust variance estimation
     * survey 
     * ivpack 
-    * 
+    * rcbalance
     
 
 #### II. PreModeling
-* Gather data
-* Assess data 
-* Clean data
-* Store data (make backup)
-* Analyze & Visualize & EDA
-* Create reports
+1. Gather data
+2. Assess data 
+3. Clean data
+4. Store data (make backup)
+5. Analyze & Visualize & EDA
+6. Create reports
 
 
-#### III. Risk difference
+#### III. Risk difference using distances
 * Pre-Matching
    * Use CreatetableOne for treatment as outcome to calculate SMD 
-   * examine SMD (cutoff < 0.1) 
+   * Examine SMD (cutoff < 0.1) 
 * Matching 
-   * Match package 
-   * extract matched pairs (append DF (treated + control) 
+   * Match package to create Matched Pairs
+   * Extract matched pairs (append DF (treated + control) to create `matched` dataframe
    * Use CreateTableOne with the matched data from previous step and examine SDMs
 * Outcome Analysis 
-   * extract `y_trt = matched$outcome[matched$treatment == 1]` 
-   * extract `y_con = matched$outcome[matched$treatment == 1]` 
+   * Etract `y_trt = matched$outcome[matched$treatment == 1]` 
+   * Extract `y_con = matched$outcome[matched$treatment == 1]` 
+   * Carry out `t-test (t.test(y_trt = y_con))`
+   * Also can perform McNemar Test using `table(y_trt, y_con)`
+      * analyze the concordant and disconcordant pairs
+
+* Use rcbalance for matching
+* Use Table one for Tables/Figures
+* Causal RR or OR use GEE or logit link function
+
+#### IV Propensity Scores for Matching
+ 
+* `psmodel <- glm(y ~ X, family=binomial(), data=data)`
+* Calculate pscore using `pscore <- psmodel$fittedvalues
+    * One could use MatchIt package and calculate pscore directly and create matched pairs
+
+
 
