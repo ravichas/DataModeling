@@ -49,18 +49,33 @@
 [comment]: # ( Inline Math Eq idea rrom: https://stackoverflow.com/a/47798853/1474291 )
 
 Probability of receiving treatment given control, and covariates X. 
+
 <img src="https://latex.codecogs.com/svg.image?\Pi_{i}&space;=&space;P(A=1|X_{i})"
 title="\Large \Pi_{i}=P(A=1|X_{i})"/>
  
 * `psmodel <- glm(y ~ X, family=binomial(), data=data)`
-* Calculate pscore using `pscore <- psmodel$fittedvalues
+* Calculate pscore using `pscore <- psmodel$fitted.values
     * One could use MatchIt package and calculate pscore directly and create matched pairs
 * Use PS to calculate logit; then use logit for matching 
 * `pm <- Match(tr=data$treatment, M=1, x=logit(pscore), replace=FALSE)`
     * Note logit is a custom function; `log(p) - log(1-p)`
+    * One could use Caliper to make SMDs reasonable 
 * Create matched pair from `pm`
 * Test SMD 
-* $`\sqrt{2}`$`
+* Etract `y_trt = matched$outcome[matched$treatment == 1]` 
+* Extract `y_con = matched$outcome[matched$treatment == 1]` 
+* Carry out `t-test (t.test(y_trt = y_con))`
+* Also can perform McNemar Test using `table(y_trt, y_con)`
+     * analyze the concordant and disconcordant pairs
 
+
+#### IPTW for matching
+
+* USE LIBRARY SURVEY and 
+* Use LR `psmodel<-(treatment ~ ., family=binomial(link="logit"))`
+* Calculate `predict` or `fitted.values` method to get `ps`
+* evaluate using plots
+* use ps to get weights 
+* use weights to get SMD table; evaluate the table for SMDs
 
 
